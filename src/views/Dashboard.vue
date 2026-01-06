@@ -122,6 +122,12 @@ export default {
       localStorage.clear();
       this.$router.push('/login');
     }
+  },
+   mounted() {
+    // Token tekshirish
+    if (!localStorage.getItem('token')) {
+      // this.$router.push('/login');
+    }
   }
 };
 </script>
