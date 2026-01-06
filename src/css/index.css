@@ -1,0 +1,96 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  /* font-family: Urbanist, sans-serif; */
+  /* font-family: "Museo Sans Cyrl", sans-serif; */
+  /* font-family: Monse; */
+ font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+
+.container {
+  max-width: 1130px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+
+
+
+
+
+
+/* 4K monitorlar (≥2560px) */
+@media (min-width: 2560px) {
+  .container {
+    max-width: 2300px;
+  }
+}
+
+/* 2K monitorlar (≥1920px) */
+@media (max-width: 1920px) {
+  .container {
+    max-width: 1620px;
+  }
+}
+
+@media (max-width: 1800px) {
+  .container {
+    max-width: 1600px;
+  }
+}
+
+/* Full HD monitorlar (≥1600px) */
+@media (max-width: 1600px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+/* Katta noutbuklar (≥1300px) */
+@media (max-width: 1300px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+#app {
+  /* height: 100vh; */
+}
