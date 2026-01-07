@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <!-- Navbar -->
-    <header class="navbar">
+    <!-- <header class="navbar">
       <div class="nav-left">
         <div class="logo">
           <i class="fa-solid fa-cloud"></i>
@@ -19,7 +19,7 @@
           <i class="fa-solid fa-right-from-bracket"></i>
         </button>
       </div>
-    </header>
+    </header> -->
 
     <!-- Content -->
     <main class="dashboard-content">
@@ -132,7 +132,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .dashboard {
   min-height: 100vh;
   background: radial-gradient(circle at top, #eef2ff, #f8fafc);

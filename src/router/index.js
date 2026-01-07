@@ -3,11 +3,14 @@ import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Dashboard2 from '../views/Dashboard2.vue'
 import Workspace from '../views/Workspace.vue'
+import Register from '../views/Register.vue'
+import HomePage from '../views/HomePage.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    name: 'home',
+    component: HomePage
   },
   {
     path: '/login',
@@ -23,6 +26,11 @@ const routes = [
     path: '/dashboard2',
     name: 'dashboard2',
     component: Dashboard2
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
   },
   {
     path: '/workspace',
