@@ -29,18 +29,21 @@ api.interceptors.request.use(
 export default {
     // Auth
     register(username, password, email) {
-        return api.post('/register', { username, password, email });
+        return api.post('/auth/register', { username, password, email });
     },
-    
+
     login(username, password) {
-        return api.post('/login', { username, password });
+        return api.post('/auth/login', { username, password });
     },
-    
+
     // Workspace
     startWorkspace() {
-        return api.post('/workspace/start');
+        return api.post('/workspaces', {
+            "name": "Asosiy muhit",
+            "template": "ubuntu-base"
+        });
     },
-    
+
     // Users
     getUsers() {
         return api.get('/users');

@@ -12,19 +12,18 @@
         <span class="username">{{ username }}</span>
       </div>
     </div>
-    
+
     <div class="workspace-content">
-      <iframe
-        v-if="workspaceUrl"
-        :src="workspaceUrl"
-        frameborder="0"
-        class="workspace-iframe"
-        title="Cloud Workspace"
-      ></iframe>
+      <iframe v-if="workspaceUrl" :src="workspaceUrl" frameborder="0" class="workspace-iframe"
+        title="Cloud Workspace"></iframe>
       <div v-else class="loading">
-        <div class="spinner"></div>
-        <p>Loading your workspace...</p>
+        <!-- <div class="spinner"></div> -->
+        <!-- <p>Loading your workspace...</p> -->
+         <!-- <img class="img-desktop"
+          src="c:\Users\User\AppData\Local\Packages\MicrosoftWindows.Client.Core_cw5n1h2txyewy\TempState\ScreenClip\{49546D36-6B4B-4DE6-8A9F-236BD21ED5F9}.png"
+          alt=""> -->
       </div>
+      <div></div>
     </div>
   </div>
 </template>
@@ -46,7 +45,7 @@ export default {
   mounted() {
     // URL'ni route params dan olish
     this.workspaceUrl = this.$route.params.url;
-    
+
     if (!this.workspaceUrl) {
       // this.$router.push('/dashboard');
     }
@@ -55,6 +54,11 @@ export default {
 </script>
 
 <style scoped>
+.img-desktop {
+  /* height: 300px; */
+  width: 600px;
+}
+
 .workspace-container {
   height: 100vh;
   display: flex;
@@ -101,9 +105,12 @@ export default {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
