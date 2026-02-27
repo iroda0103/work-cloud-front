@@ -4,10 +4,11 @@
       <nav class="navbar">
         <!-- Logo -->
         <router-link :to="isAuthenticated ? '/dashboard' : '/'" class="logo">
-          <div class="logo-icon">
-            <i class="fa-solid fa-cloud"></i>
-          </div>
-          <span class="logo-text">Work Cloud</span>
+          <!-- <div class="logo-icon"> -->
+            <!-- <i class="fa-solid fa-cloud"></i> -->
+            <img class="logo-icon" src="/workcloud-icon.svg">
+          <!-- </div> -->
+          <span class="logo-text" >Work Cloud</span>
         </router-link>
 
         <!-- Navigation Links (faqat login qilmagan userlar uchun) -->
@@ -134,10 +135,9 @@ export default {
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 10px;
-  background: #667eea;
   display: grid;
   place-items: center;
   color: white;
