@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import.meta.env.BASE_URL || 
 // Backend URL
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://api.work-cloud.uz/api';
 
 // Axios instance
 const api = axios.create({
