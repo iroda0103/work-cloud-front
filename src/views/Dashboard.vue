@@ -108,7 +108,7 @@ export default {
     async startWorkspace() {
       this.loading = true;
       this.error = null;
-      this.$router.push({ name: 'workspace', params: { url: 'http://161.97.159.45:6901/vnc.html?autoconnect=true&resize=scale' } })
+      this.$router.push({ name: 'workspace', params: { url: 'https://vnc.work-cloud.uz/' } })
       // try {
       //   const { data } = await api.startWorkspace();
       //   this.workspaceActive = true;

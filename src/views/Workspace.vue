@@ -35,7 +35,8 @@ export default {
     return {
       username: localStorage.getItem('username') || 'User',
       // workspaceUrl: null
-      workspaceUrl: 'http://161.97.159.45:6901/vnc.html?autoconnect=true&resize=scale'
+      workspaceUrl: 'https://vnc.work-cloud.uz/',
+      // workspaceUrl: 'http://161.97.159.45:6901/vnc.html?autoconnect=true&resize=scale'
     };
   },
   methods: {
