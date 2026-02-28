@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       username: localStorage.getItem('username') || 'User',
-      workspaceUrl: null
+      // workspaceUrl: null
+      workspaceUrl: 'http://161.97.159.45:6901/vnc.html?autoconnect=true&resize=scale'
     };
   },
   methods: {
@@ -44,7 +45,7 @@ export default {
   },
   mounted() {
     // URL'ni route params dan olish
-    this.workspaceUrl = this.$route.params.url;
+    // this.workspaceUrl = this.$route.params.url;
 
     if (!this.workspaceUrl) {
       // this.$router.push('/dashboard');

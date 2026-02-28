@@ -108,15 +108,16 @@ export default {
     async startWorkspace() {
       this.loading = true;
       this.error = null;
-      try {
-        const { data } = await api.startWorkspace();
-        this.workspaceActive = true;
-        this.$router.push({ name: 'workspace', params: { url: data.workspaceUrl } });
-      } catch (e) {
-        this.error = e.response?.data?.error || 'Failed to start workspace';
-      } finally {
-        this.loading = false;
-      }
+      this.$router.push({ name: 'workspace', params: { url: 'http://161.97.159.45:6901/vnc.html?autoconnect=true&resize=scale' } })
+      // try {
+      //   const { data } = await api.startWorkspace();
+      //   this.workspaceActive = true;
+      //   this.$router.push({ name: 'workspace', params: { url: data.workspaceUrl } });
+      // } catch (e) {
+      //   this.error = e.response?.data?.error || 'Failed to start workspace';
+      // } finally {
+      //   this.loading = false;
+      // }
     },
     logout() {
       localStorage.clear();
