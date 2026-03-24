@@ -1,86 +1,92 @@
 <template>
   <footer class="footer">
+    <!-- Top border glow -->
+    <div class="footer-glow"></div>
+
     <div class="container">
       <!-- Footer Top -->
       <div class="footer-top">
-        <div class="footer-column">
-          <div class="footer-logo">
-            <div class="logo-icon">
+        <div class="footer-brand">
+          <router-link to="/" class="brand-logo">
+            <div class="brand-icon">
               <i class="fa-solid fa-cloud"></i>
             </div>
-            <span class="logo-text">Work Cloud</span>
-          </div>
-          <p class="footer-desc">
-            Your personal cloud workspace for modern development. 
-            Access a full Linux desktop from anywhere.
+            <span>Work Cloud</span>
+          </router-link>
+          <p class="brand-desc">
+            Your personal cloud workspace for modern development.
+            Access a full Linux desktop from anywhere in the world.
           </p>
           <div class="social-links">
-            <a href="#" aria-label="GitHub">
+            <a href="#" aria-label="GitHub" class="social-btn">
               <i class="fa-brands fa-github"></i>
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="#" aria-label="Twitter" class="social-btn">
               <i class="fa-brands fa-twitter"></i>
             </a>
-            <a href="#" aria-label="LinkedIn">
+            <a href="#" aria-label="LinkedIn" class="social-btn">
               <i class="fa-brands fa-linkedin"></i>
             </a>
-            <a href="#" aria-label="Discord">
+            <a href="#" aria-label="Discord" class="social-btn">
               <i class="fa-brands fa-discord"></i>
             </a>
           </div>
         </div>
 
-        <div class="footer-column">
-          <h4>Product</h4>
-          <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#docs">Documentation</a></li>
-            <li><a href="#api">API</a></li>
-          </ul>
-        </div>
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h5 class="col-title">Product</h5>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#docs">Documentation</a></li>
+              <li><a href="#api">API</a></li>
+            </ul>
+          </div>
 
-        <div class="footer-column">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#careers">Careers</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
+          <div class="footer-col">
+            <h5 class="col-title">Company</h5>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#careers">Careers</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
 
-        <div class="footer-column">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="#community">Community</a></li>
-            <li><a href="#support">Support</a></li>
-            <li><a href="#guides">Guides</a></li>
-            <li><a href="#status">Status</a></li>
-          </ul>
-        </div>
+          <div class="footer-col">
+            <h5 class="col-title">Resources</h5>
+            <ul>
+              <li><a href="#community">Community</a></li>
+              <li><a href="#support">Support</a></li>
+              <li><a href="#guides">Guides</a></li>
+              <li><a href="#status">
+                <span class="status-dot"></span>
+                System Status
+              </a></li>
+            </ul>
+          </div>
 
-        <div class="footer-column">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#terms">Terms of Service</a></li>
-            <li><a href="#security">Security</a></li>
-            <li><a href="#cookies">Cookie Policy</a></li>
-          </ul>
+          <div class="footer-col">
+            <h5 class="col-title">Legal</h5>
+            <ul>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms of Service</a></li>
+              <li><a href="#security">Security</a></li>
+              <li><a href="#cookies">Cookie Policy</a></li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <!-- Footer Bottom -->
       <div class="footer-bottom">
         <p class="copyright">
-          © {{ currentYear }} Work Cloud. All rights reserved.
+          © {{ currentYear }} Work Cloud, Inc. All rights reserved.
         </p>
-        <div class="footer-links">
+        <div class="bottom-links">
           <a href="#privacy">Privacy</a>
-          <span class="divider">•</span>
           <a href="#terms">Terms</a>
-          <span class="divider">•</span>
           <a href="#sitemap">Sitemap</a>
         </div>
       </div>
@@ -101,109 +107,167 @@ export default {
 
 <style scoped>
 .footer {
-  background: #1f2937;
-  color: #d1d5db;
-  padding: 60px 0 30px;
+  background: var(--bg-0);
+  border-top: 1px solid var(--border);
+  padding: 72px 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 1px;
+  background: var(--gradient);
+  filter: blur(0px);
+  opacity: 0.6;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+  position: relative;
 }
 
 /* Footer Top */
 .footer-top {
   display: grid;
-  grid-template-columns: 2fr repeat(4, 1fr);
-  gap: 40px;
-  margin-bottom: 50px;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  margin-bottom: 56px;
 }
 
-.footer-column:first-child {
-  max-width: 350px;
+/* Brand Section */
+.footer-brand {
+  max-width: 300px;
 }
 
-/* Logo */
-.footer-logo {
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gradient);
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #667eea;
-  display: grid;
-  place-items: center;
+  justify-content: center;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
 }
 
-.logo-text {
+.brand-logo span {
+  font-size: 17px;
   font-weight: 700;
-  font-size: 20px;
-  color: white;
+  color: var(--text-1);
 }
 
-.footer-desc {
-  margin-bottom: 20px;
-  line-height: 1.6;
-  color: #9ca3af;
+.brand-desc {
+  font-size: 14px;
+  color: var(--text-3);
+  line-height: 1.7;
+  margin-bottom: 24px;
 }
 
 /* Social Links */
 .social-links {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
-.social-links a {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #374151;
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-3);
+  font-size: 15px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  background: rgba(124, 58, 237, 0.12);
+  border-color: rgba(124, 58, 237, 0.4);
+  color: var(--purple-3);
+  transform: translateY(-2px);
+}
+
+/* Footer Links */
+.footer-links-group {
   display: grid;
-  place-items: center;
-  color: #d1d5db;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
 }
 
-.social-links a:hover {
-  background: #667eea;
-  color: white;
-}
-
-/* Footer Columns */
-.footer-column h4 {
-  color: white;
-  margin-bottom: 16px;
-  font-size: 16px;
+.col-title {
+  font-size: 13px;
   font-weight: 600;
+  color: var(--text-1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
 }
 
-.footer-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.footer-column ul li {
-  margin-bottom: 12px;
-}
-
-.footer-column ul li a {
-  color: #9ca3af;
+.footer-col ul li a {
+  font-size: 14px;
+  color: var(--text-3);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
-  transition: color 0.3s;
 }
 
-.footer-column ul li a:hover {
-  color: #667eea;
+.footer-col ul li a:hover {
+  color: var(--purple-3);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 /* Footer Bottom */
@@ -211,82 +275,49 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 30px;
-  border-top: 1px solid #374151;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
 }
 
 .copyright {
-  color: #9ca3af;
-  margin: 0;
+  font-size: 13px;
+  color: var(--text-3);
 }
 
-.footer-links {
+.bottom-links {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 24px;
 }
 
-.footer-links a {
-  color: #9ca3af;
+.bottom-links a {
+  font-size: 13px;
+  color: var(--text-3);
+  transition: color 0.2s;
   text-decoration: none;
-  transition: color 0.3s;
 }
 
-.footer-links a:hover {
-  color: #667eea;
-}
-
-.divider {
-  color: #4b5563;
+.bottom-links a:hover {
+  color: var(--text-2);
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
   .footer-top {
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
-
-  .footer-column:nth-child(4),
-  .footer-column:nth-child(5) {
-    grid-column: span 1;
-  }
+  .footer-brand { max-width: 100%; }
+  .footer-links-group { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .footer-top {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
-
-  .footer-column:first-child {
-    grid-column: span 2;
-    max-width: 100%;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  .footer-links-group { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .bottom-links { flex-wrap: wrap; justify-content: center; }
 }
 
 @media (max-width: 480px) {
-  .footer-top {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-column:first-child {
-    grid-column: span 1;
-  }
-
-  .social-links {
-    justify-content: center;
-  }
+  .footer { padding: 48px 0 28px; }
+  .footer-links-group { grid-template-columns: repeat(2, 1fr); }
 }
 </style>

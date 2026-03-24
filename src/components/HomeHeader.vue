@@ -4,14 +4,13 @@
       <nav class="navbar">
         <!-- Logo -->
         <router-link :to="isAuthenticated ? '/dashboard' : '/'" class="logo">
-          <!-- <div class="logo-icon"> -->
-            <!-- <i class="fa-solid fa-cloud"></i> -->
-            <img class="logo-icon" src="/workcloud-icon.svg">
-          <!-- </div> -->
-          <span class="logo-text" >Work Cloud</span>
+          <div class="logo-mark">
+            <img src="/workcloud-icon.svg" alt="Work Cloud" />
+          </div>
+          <span class="logo-text">Work <span class="logo-accent">Cloud</span></span>
         </router-link>
 
-        <!-- Navigation Links (faqat login qilmagan userlar uchun) -->
+        <!-- Navigation Links (Guest) -->
         <div v-if="!isAuthenticated" class="nav-links" :class="{ active: menuOpen }">
           <a href="#features" @click="closeMenu">Features</a>
           <a href="#pricing" @click="closeMenu">Pricing</a>
@@ -19,40 +18,36 @@
           <a href="#contact" @click="closeMenu">Contact</a>
         </div>
 
-        <!-- Dashboard/Workspace uchun navigation -->
+        <!-- Dashboard nav (Authenticated on workspace page) -->
         <div v-if="isAuthenticated && showDashboardNav" class="nav-links-auth">
-          <router-link to="/dashboard" class="nav-link">
+          <router-link to="/dashboard" class="nav-link-auth">
             <i class="fa-solid fa-th-large"></i>
             Dashboard
           </router-link>
         </div>
 
-        <!-- Auth Buttons (Guest user uchun) -->
+        <!-- Auth Buttons (Guest) -->
         <div v-if="!isAuthenticated" class="nav-auth">
-          <router-link to="/login" class="btn-login">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            Sign In
-          </router-link>
-          <router-link to="/register" class="btn-register">
-            <i class="fa-solid fa-rocket"></i>
+          <router-link to="/login" class="btn-ghost">Sign In</router-link>
+          <router-link to="/register" class="btn-glow">
             Get Started
+            <i class="fa-solid fa-arrow-right"></i>
           </router-link>
         </div>
 
-        <!-- User Info & Logout (Authenticated user uchun) -->
+        <!-- User Section (Authenticated) -->
         <div v-if="isAuthenticated" class="user-section">
-          <div class="user-info">
-            <i class="fa-solid fa-user"></i>
-            <span>{{ username }}</span>
+          <div class="user-badge">
+            <div class="user-avatar">{{ username.charAt(0).toUpperCase() }}</div>
+            <span class="username">{{ username }}</span>
           </div>
-          <button class="btn-logout" @click="logout">
+          <button class="btn-logout" @click="logout" title="Logout">
             <i class="fa-solid fa-right-from-bracket"></i>
-            <span class="logout-text">Logout</span>
           </button>
         </div>
 
         <!-- Mobile Menu Toggle -->
-        <button v-if="!isAuthenticated" class="menu-toggle" @click="toggleMenu">
+        <button v-if="!isAuthenticated" class="menu-toggle" @click="toggleMenu" :aria-label="menuOpen ? 'Close menu' : 'Open menu'">
           <i class="fa-solid" :class="menuOpen ? 'fa-xmark' : 'fa-bars'"></i>
         </button>
       </nav>
@@ -74,17 +69,12 @@ export default {
       return !!localStorage.getItem('token') || this.$route.name === 'workspace' || this.$route.name === 'dashboard';
     },
     showDashboardNav() {
-      // Workspace sahifasida Dashboard linkini ko'rsatish
       return this.$route.name === 'workspace';
     }
   },
   methods: {
-    toggleMenu() {
-      this.menuOpen = !this.menuOpen;
-    },
-    closeMenu() {
-      this.menuOpen = false;
-    },
+    toggleMenu() { this.menuOpen = !this.menuOpen; },
+    closeMenu() { this.menuOpen = false; },
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('username');
@@ -92,7 +82,6 @@ export default {
     }
   },
   watch: {
-    // Route o'zgarganda username'ni yangilash
     '$route'() {
       this.username = localStorage.getItem('username') || 'User';
     }
@@ -104,266 +93,282 @@ export default {
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid #e5e7eb;
+  z-index: 1000;
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(5, 5, 14, 0.85);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  height: 68px;
 }
 
 /* Logo */
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 20px;
-  color: #1f2937;
+  flex-shrink: 0;
 }
 
-.logo-icon {
-  width: 60px;
-  height: 60px;
+.logo-mark {
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 20px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3));
+  border: 1px solid rgba(139,92,246,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.3s;
 }
 
-/* Navigation Links (Guest) */
+.logo:hover .logo-mark {
+  border-color: var(--purple-2);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+.logo-mark img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.3px;
+}
+
+.logo-accent {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Nav Links (Guest) */
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 4px;
   align-items: center;
 }
 
 .nav-links a {
-  text-decoration: none;
-  color: #6b7280;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
-  transition: color 0.3s;
-  position: relative;
+  color: var(--text-2);
+  transition: color 0.2s, background 0.2s;
 }
 
 .nav-links a:hover {
-  color: #667eea;
+  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #667eea;
-  transition: width 0.3s;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-/* Navigation Links (Authenticated) */
+/* Nav Links (Auth) */
 .nav-links-auth {
   display: flex;
-  gap: 20px;
   align-items: center;
 }
 
-.nav-link {
+.nav-link-auth {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: #6b7280;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
-  transition: all 0.3s;
+  color: var(--text-2);
+  transition: all 0.2s;
 }
 
-.nav-link:hover {
-  background: #f3f4f6;
-  color: #667eea;
+.nav-link-auth:hover {
+  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.nav-link i {
-  font-size: 16px;
-}
+.nav-link-auth i { font-size: 14px; }
 
-/* Auth Buttons (Guest) */
+/* Auth Buttons */
 .nav-auth {
   display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.btn-login,
-.btn-register {
-  padding: 10px 24px;
-  border-radius: 10px;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  font-family: inherit;
 }
 
-.btn-login {
-  color: #667eea;
-  background: transparent;
-  border: 2px solid transparent;
+.btn-ghost {
+  padding: 8px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-2);
+  transition: all 0.2s;
+  border: 1px solid transparent;
 }
 
-.btn-login:hover {
-  background: #f8fafc;
+.btn-ghost:hover {
+  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border);
 }
 
-.btn-register {
-  background: #667eea;
+.btn-glow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--gradient);
   color: white;
-  border: 2px solid transparent;
+  transition: all 0.3s;
+  box-shadow: 0 0 0 rgba(124, 58, 237, 0);
 }
 
-.btn-register:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+.btn-glow:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-purple);
 }
 
-/* User Section (Authenticated) */
+.btn-glow i {
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.btn-glow:hover i {
+  transform: translateX(3px);
+}
+
+/* User Section */
 .user-section {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
-.user-info {
+.user-badge {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #374151;
-  font-weight: 500;
-  padding: 10px 16px;
-  background: #f3f4f6;
+  padding: 6px 14px 6px 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
-.user-info i {
-  color: #667eea;
-  font-size: 16px;
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-1);
 }
 
 .btn-logout {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: #f3f4f6;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  color: #374151;
-  font-family: inherit;
-  transition: all 0.3s;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text-2);
+  font-size: 14px;
+  transition: all 0.2s;
 }
 
 .btn-logout:hover {
-  background: #fee2e2;
-  color: #dc2626;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
 }
 
-.btn-logout i {
-  font-size: 16px;
-}
-
-/* Mobile Menu Toggle */
+/* Mobile Toggle */
 .menu-toggle {
   display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #1f2937;
-  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text-1);
+  font-size: 16px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .navbar { height: 60px; }
+
   .nav-links {
     position: fixed;
-    top: 80px;
+    top: 60px;
     left: 0;
     right: 0;
-    background: white;
+    background: rgba(10, 10, 24, 0.98);
+    backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(-120%);
-    transition: transform 0.3s;
+    padding: 16px;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    transform: translateY(-110%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
   }
 
   .nav-links.active {
     transform: translateY(0);
-  }
-
-  .nav-auth {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
+    opacity: 1;
   }
 
   .nav-links a {
-    font-size: 18px;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
   }
 
-  .user-info {
-    padding: 8px 12px;
-  }
+  .nav-auth { display: none; }
 
-  .user-info span {
-    display: none;
-  }
+  .menu-toggle { display: flex; }
 
-  .logout-text {
-    display: none;
-  }
-
-  .btn-logout {
-    padding: 10px;
-  }
-
-  .nav-links-auth {
-    display: none;
-  }
+  .username { display: none; }
+  .user-badge { padding: 6px; }
 }
 
 @media (max-width: 480px) {
-  .logo-text {
-    display: none;
-  }
-
-  .navbar {
-    padding: 15px 0;
-  }
+  .logo-text { display: none; }
 }
 </style>
